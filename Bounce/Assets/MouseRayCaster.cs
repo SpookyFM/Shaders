@@ -32,9 +32,13 @@ public class MouseRayCaster : MonoBehaviour {
 		// Feed the information to the shader
 		// Where was the hit?
 		gameObject.GetComponent<MeshRenderer>().material.SetVector("_HitLocation", new Vector4(hit.point.x, hit.point.y, hit.point.z, 1.0f));
-		
+
+        Vector3 normal = hit.normal;
+
+        normal = gameObject.transform.rotation * normal;
+
 		// What is the hit normal?
-		gameObject.GetComponent<MeshRenderer>().material.SetVector("_Impact", new Vector4(hit.normal.x, hit.normal.y, hit.normal.z, 0.0f));
+		gameObject.GetComponent<MeshRenderer>().material.SetVector("_Impact", new Vector4(normal.x, normal.y, normal.z, 0.0f));
 		
 		
 		// Start the animation
